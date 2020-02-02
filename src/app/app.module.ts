@@ -28,6 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { WebsocketService } from './websocket.service';
 import {DataService} from './data.service';
+import { BarchartComponent } from './barchart/barchart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {DataService} from './data.service';
     HomeComponent,
     DetailsComponent,
     HeaderComponent,
-    CartComponent
+    CartComponent,
+    BarchartComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,6 +66,7 @@ import {DataService} from './data.service';
     MatRadioModule,
     MatSelectModule,
     MatTooltipModule,
+    ChartsModule,
     StarRatingModule.forRoot()
   ],
   providers: [HomeComponent, DetailsComponent,DataService, WebsocketService],

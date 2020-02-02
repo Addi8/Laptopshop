@@ -8,7 +8,7 @@ export interface Laptop {
   asin: string;
   productTitle: string;
   price: number;
-  displaySize: number;
+  screenSize: string;
   screenResoultionSize: screenResolutionSize;
   processorSpeed: number;
   processorType: string;

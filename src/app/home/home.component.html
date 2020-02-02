@@ -33,8 +33,8 @@
           <mat-checkbox
             (change)="onChange($event, 'brandName', 'brandNameValue')"
             [value]="brand.id"
-            >{{ brand.name }}</mat-checkbox
-          >
+            >{{ brand.name }}
+          </mat-checkbox>
         </div>
         <mat-slider
           formControlName="weight"
@@ -68,9 +68,10 @@
           <mat-checkbox
             (change)="onChange($event, 'price', 'priceRange')"
             [value]="option.id"
-            >{{ option.name }}</mat-checkbox
-          >
+            >{{ option.name }}</mat-checkbox>
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -139,6 +140,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -173,6 +176,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -207,6 +212,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -241,6 +248,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -275,6 +284,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -309,6 +320,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -345,6 +358,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -379,6 +394,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -413,6 +430,8 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
+        <mat-checkbox formControlName="review">show users reviews?
+        </mat-checkbox>
         <mat-slider
           formControlName="weight"
           color="primary"
@@ -523,6 +542,23 @@
                     </div>
                 </div>
             <div style="clear: both"></div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="review">
+        <th mat-header-cell *matHeaderCellDef>Reviews</th>
+        <td mat-cell *matCellDef="let element" [routerLink]="['/details', element.asin]">
+          <div class="flex-container" *ngIf="reviewAttributes">
+            <div *ngFor="let attribute of reviewAttributes">
+              <div class="flex-container" *ngIf="reviewsData[element.asin]&&reviewsData[element.asin][attribute]">
+                <app-barchart
+                [positive]="reviewsData[element.asin][attribute]['positive']"
+                [neutral]="reviewsData[element.asin][attribute]['neutral']"
+                [negative]="reviewsData[element.asin][attribute]['negative']"
+                [attribute]="attribute"></app-barchart>
+              </div>
+            </div>
           </div>
         </td>
       </ng-container>

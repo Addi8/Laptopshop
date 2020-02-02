@@ -1,15 +1,4 @@
 <app-header pageTitle="Details" helpTitle="Help text for details page"></app-header>
-<!-- <mat-card class=alexa-sign>
-  <mat-card-header>
-    <div mat-card-avatar class="alexa-image"></div>
-    <mat-card-title>Hint: Use Amazon Alexa to refine your query!</mat-card-title>
-    <mat-card-subtitle>(e.g. " I'm looking for a bigger screen")</mat-card-subtitle>
-  </mat-card-header>
-  <!--
-  <button (click)="sendItem()" *ngIf="laptops">send</button>
-  <button (click)="sendLaptops()" [routerLink]="['/home',laptops]" *ngIf="laptops">Result</button>
-
-</mat-card> -->
 
 <mat-card fxLayout="row" fxLayoutGap="20px" style="padding:20px; position:center" *ngIf="item">
 
@@ -24,13 +13,13 @@
       <strong>RAM: </strong> {{item.ram}} GB<br>
       <strong>Hard drive type: </strong>{{item.hardDriveType}}<br>
       <strong>Hard drive capacity: </strong>{{item.hddSize}} GB<br>
-      <strong>Display size: </strong>{{item.displaySize}} Zoll<br>
+      <strong>Display size: </strong>{{item.screenSize}} inch<br>
       <strong>Operating System: </strong>{{item.operatingSystem}}<br>
-        <strong>Chipset brand: </strong>{{item.chipsetBrand}}<br>
+      <strong>Chipset brand: </strong>{{item.chipsetBrand}}<br>
       <strong>processor speed: </strong>{{item.processorSpeed}}<br>
       <strong>processor count: </strong>{{item.processorCount}}<br>
       <strong>processor brand: </strong>{{item.processorManufacturer}}<br>
-        <strong>Average rating: </strong>{{item.avgRating}}<br>
+      <strong>Average rating: </strong>{{item.avgRating}}<br>
 
 
 

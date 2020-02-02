@@ -15,7 +15,7 @@ app = Flask(__name__) #Create the flask instance, __name__ is the name of the cu
 
 @app.route('/api/sample', methods=['GET'])
 def getSample():
-  allDocs = es.search(index="amazon", body={
+  allDocs = es.search(index="laptops", body={
       "match": {
         "avgRating": 5
       }
@@ -30,7 +30,7 @@ def getSample():
 
 def helper():
   query = '{"query": {"bool": {"must":[{"range": {"price": {"lte": 400,"gte": 200}}},{"range":{"avgRating": {"gte" :4.0}}},{"term": {"brandName": {"value": "hp"}}}]}}}'
-  allDocs = es.search(index="amazon", body=query,size=1000)
+  allDocs = es.search(index="laptops", body=query,size=1000)
   outputProducts = Backend_Helper.refineResult(allDocs)
   result = []
   for x in outputProducts:
