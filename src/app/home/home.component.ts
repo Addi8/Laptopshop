@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   reviewsData: any = [];
   reviewAttributes: any = [];
   attributes: any[] = [];
-  displayedColumns: string[] = ['image', 'name', 'price', 'review'];
+  displayedColumns: string[] = ['image', 'name', 'price', 'feedbackCondition', 'review'];
   dataSource: MatTableDataSource<Laptop>;
   reviewsMap = {
     price : 'Price',
@@ -42,9 +42,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     hardDriveType : 'Performance',
     hardDriveSize : 'Performance',
     operatingSystem : 'Performance',
-    ram : 'Perfrmance',
-    itemWeight : 'Design'
+    ram: 'Performance',
+    itemWeight : 'Design',
+    averageBatteryLife : 'Battery Life'
     };
+  hideFeedback = true;
+  hideReviews = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -301,9 +304,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         .search(JSON.stringify(formValue))
         .subscribe(laptops => {
           this.setReviewAttributes(formValue);
+          console.log(this.reviewAttributes);
           // @ts-ignore
           this.dataService.laptops = laptops[0];
-          // console.log(laptops[1]);
+          this.hideFeedback = false;
           this.attributes = [];
           // @ts-ignore
           this.laptops = laptops[0];
@@ -357,7 +361,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                 }
               }
               this.dataService.attributes = this.attributes;
-              console.log(this.attributes);
             }
           }
           this.dataSource = new MatTableDataSource(this.laptops);
@@ -376,6 +379,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.reviewAttributes.push(this.reviewsMap[field]);
         }
       }
+    }
+    if (this.reviewAttributes.length > 0) {
+      this.hideReviews = false;
     }
   }
 

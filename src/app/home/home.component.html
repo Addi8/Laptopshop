@@ -523,32 +523,39 @@
 
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-        <td mat-cell class ="price" *matCellDef="let element"><h2>{{ element.price }} € </h2><br/>
+        <td mat-cell class ="price" *matCellDef="let element">
+          <h2>{{ element.price }} € </h2>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="feedbackCondition">
+        <th mat-header-cell [hidden]="hideFeedback" *matHeaderCellDef mat-sort-header>Feedback Condition</th>
+        <td mat-cell [hidden]="hideFeedback" *matCellDef="let element">
           <div class="flex-container" *ngIf="checkMatched(element.matched)">
-                <div class = "feedback" *ngFor="let x of attributes">
-                    <div *ngFor="let y of x | keyvalue">
-                        <div *ngIf="element.matched[y.key]=='green'" [ngClass]="arr[y.key] === 0 ? '' : 'mustHave'" class="element">
-                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
-                            <img src="../assets/images/check.jpg" />
-                        </div>
-                        <div *ngIf="element.matched[y.key]=='red' " class="element">
-                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
-                            <img src="../assets/images/x.jpg" />
-                        </div>
-                        <div *ngIf="element.matched[y.key]=='yellow' " class="element">
-                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
-                            <img src="../assets/images/question.png" />
-                        </div>
-                    </div>
+            <div class="feedback" *ngFor="let x of attributes">
+              <div *ngFor="let y of x | keyvalue">
+                <div *ngIf="element.matched[y.key]=='green'" [ngClass]="arr[y.key] === 0 ? '' : 'mustHave'" class="element">
+                  <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                  <img src="../assets/images/check.jpg" />
                 </div>
+                <div *ngIf="element.matched[y.key]=='red' " class="element">
+                  <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                  <img src="../assets/images/x.jpg" />
+                </div>
+                <div *ngIf="element.matched[y.key]=='yellow' " class="element">
+                  <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                  <img src="../assets/images/question.png" />
+                </div>
+              </div>
+            </div>
             <div style="clear: both"></div>
           </div>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="review">
-        <th mat-header-cell *matHeaderCellDef>Reviews</th>
-        <td mat-cell *matCellDef="let element" [routerLink]="['/details', element.asin]">
+        <th mat-header-cell [hidden]="hideReviews" *matHeaderCellDef>Reviews</th>
+        <td mat-cell [hidden]="hideReviews" *matCellDef="let element" [routerLink]="['/details', element.asin]">
           <div class="flex-container" *ngIf="reviewAttributes">
             <div *ngFor="let attribute of reviewAttributes">
               <div class="flex-container" *ngIf="reviewsData[element.asin]&&reviewsData[element.asin][attribute]">
