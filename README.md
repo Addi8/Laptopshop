@@ -10,7 +10,23 @@ Laptop Search engine with the following freatures :
 
 ## Development server
 
-1- Navigate in the backend Folder and run main.py using python interpreter for the Vague search system or main_binary.py for the binary search system.
+1- First create a virtual environment to install all dependancies in it
+
+```
+pip install pipenv
+pipenv --three
+pipenv install
+
+```
+and for the Frontend
+
+```npm install```
+
+2- For the Vague search system, navigate to the backend Folder and run
+
+` python3 main.py`
+or
+`main_binary.py`  for the binary search system.
 
 2- Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
