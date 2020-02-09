@@ -16,6 +16,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import * as $ from 'jquery/dist/jquery.min.js';
 import { WebsocketService } from '../websocket.service';
+import { ConsoleReporter } from 'jasmine';
 
 declare const callme: any;
 
@@ -28,9 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   // dummyData = <any>data;
   state = '';
   laptops: any[] = [];
-  reviewsData: any = [];
+  filteredReviewsData: any = [];
   reviewAttributes: any = [];
   attributes: any[] = [];
+  arr: any[];
   displayedColumns: string[] = ['image', 'name', 'price', 'feedbackCondition', 'review'];
   dataSource: MatTableDataSource<Laptop>;
   reviewsMap = {
@@ -219,10 +221,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   });
 
-  // globalForm = new FormGroup({
-  //   globalSearch: new FormControl()
-  // });
-  arr: any[];
   constructor(private dataService: DataService, private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -259,7 +257,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onHover(index: string) {
     if (index != null  && this.arr[index] === 1) {
-        return 'You chose weight 5 for this field, this means all the results will have the chosen value for this field.'
+        return 'You chose weight 5 for this field, this means all the results will have the chosen value for this field.';
     }
   }
 
@@ -312,7 +310,11 @@ export class HomeComponent implements OnInit, OnDestroy {
           // @ts-ignore
           this.laptops = laptops[0];
           const attributes = laptops[1];
-          this.reviewsData = laptops[2];
+          const reviewsData = laptops[2];
+          this.filteredReviewsData = this.filterBadReviews(reviewsData);
+          this.laptops = this.laptops.filter((laptop) => {
+            return this.filteredReviewsData.hasOwnProperty(laptop.asin);
+          });
           for (const attributesKey in attributes) {
             if (attributes.hasOwnProperty(attributesKey)) {
               for (const property in attributes[attributesKey]) {
@@ -383,6 +385,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.reviewAttributes.length > 0) {
       this.hideReviews = false;
     }
+  }
+
+  filterBadReviews(reviews) {
+    for (const asin in reviews) {
+      if (reviews.hasOwnProperty(asin)) {
+        for (let i = 0; i <= this.reviewAttributes.length; i++) {
+          if (reviews[asin].hasOwnProperty(this.reviewAttributes[i])) {
+            const totalReviews = reviews[asin][this.reviewAttributes[i]].positive + reviews[asin][this.reviewAttributes[i]].negative
+              + reviews[asin][this.reviewAttributes[i]].neutral;
+            const negativeReviews = reviews[asin][this.reviewAttributes[i]].negative;
+            if (negativeReviews > 0.5 * totalReviews) {
+              delete reviews[asin];
+              break;
+            }
+          }
+        }
+      }
+    }
+    return reviews;
   }
 
   getSample() {

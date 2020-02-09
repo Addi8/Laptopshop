@@ -70,7 +70,7 @@
             [value]="option.id"
             >{{ option.name }}</mat-checkbox>
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -140,7 +140,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -176,7 +176,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -212,7 +212,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -248,7 +248,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -284,7 +284,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -320,7 +320,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -358,7 +358,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -394,7 +394,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -430,7 +430,7 @@
             >{{ option.name }}</mat-checkbox
           >
         </div>
-        <mat-checkbox formControlName="review">show users reviews?
+        <mat-checkbox formControlName="review">Only Positive Reviews
         </mat-checkbox>
         <mat-slider
           formControlName="weight"
@@ -558,11 +558,11 @@
         <td mat-cell [hidden]="hideReviews" *matCellDef="let element" [routerLink]="['/details', element.asin]">
           <div class="flex-container" *ngIf="reviewAttributes">
             <div *ngFor="let attribute of reviewAttributes">
-              <div class="flex-container" *ngIf="reviewsData[element.asin]&&reviewsData[element.asin][attribute]">
+              <div class="flex-container" *ngIf="filteredReviewsData[element.asin]&&filteredReviewsData[element.asin][attribute]">
                 <app-barchart
-                [positive]="reviewsData[element.asin][attribute]['positive']"
-                [neutral]="reviewsData[element.asin][attribute]['neutral']"
-                [negative]="reviewsData[element.asin][attribute]['negative']"
+                [positive]="filteredReviewsData[element.asin][attribute]['positive']"
+                [neutral]="filteredReviewsData[element.asin][attribute]['neutral']"
+                [negative]="filteredReviewsData[element.asin][attribute]['negative']"
                 [attribute]="attribute"></app-barchart>
               </div>
             </div>
