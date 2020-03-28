@@ -457,6 +457,25 @@
         </div>
       </mat-card>
 
+      <mat-card fxLayout="column" formGroupName="averageBatteryLife" [ngClass]="arr['averageBatteryLife'] === 0 ? '' : 'mustHave'"
+        [matTooltip]="onHover('averageBatteryLife')">
+        <mat-card-title>Battery Life</mat-card-title>
+        <div *ngFor="let option of batteryLife">
+          <mat-checkbox (change)="onChange($event, 'averageBatteryLife', 'averageBatteryLifeRange')" [value]="option.id">{{ option.name }}
+          </mat-checkbox>
+        </div>
+        <mat-checkbox formControlName="review">Only Positive Reviews
+        </mat-checkbox>
+        <mat-slider formControlName="weight" color="primary" min="1" max="5" step="1" *ngIf="!arr['averageBatteryLife']"
+          (change)="onInputChange($event,'averageBatteryLife')"></mat-slider>
+        <mat-slider formControlName="weight" color="warn" min="1" max="5" step="1" value="5" *ngIf="arr['averageBatteryLife']"
+          (change)="onInputChange($event,'averageBatteryLife')"></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
       <mat-card-actions>
         <button mat-raised-button type="submit" color="primary">Search</button>
       </mat-card-actions>

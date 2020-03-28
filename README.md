@@ -8,9 +8,24 @@ Laptop Search engine with the following freatures :
 
 3- The ability to refine the search result using voice queries for one attribute at a time
 
+4- Filter based on Crowd Opinion
+
 ## Development server
 
-1- First create a virtual environment to install all dependancies in it
+1- First install elasticsearch from https://www.elastic.co/downloads/elasticsearch and run it
+
+2- Index the data in the dump folder by running (replace path_to_json with the dump folder path)
+```
+npm install elasticdump -g
+elasticdump \
+  	--input=path_to_json/products.json \
+	--output=http://localhost:9200/products
+
+elasticdump \
+  --input=path_to_json/laptops.json \
+   --output=http://localhost:9200/laptops
+```
+2- Create a virtual environment to install all dependancies in it
 
 ```
 pip install pipenv
@@ -22,15 +37,15 @@ and for the Frontend
 
 ```npm install```
 
-2- For the Vague search system, navigate to the backend Folder and run
+3- For the Vague search system, navigate to the backend Folder and run
 
 ` python3 main.py`
 or
 `main_binary.py`  for the binary search system.
 
-2- Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+4- Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-3- if you want to activate Alexa, run main_alexa.py 
+5- if you want to activate Alexa, run main_alexa.py 
 
 # Using Alexa
 

@@ -16,7 +16,6 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import * as $ from 'jquery/dist/jquery.min.js';
 import { WebsocketService } from '../websocket.service';
-import { ConsoleReporter } from 'jasmine';
 
 declare const callme: any;
 
@@ -160,6 +159,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     { id: { minValue: 2.5 }, name: '> 2.5 kg' }
   ];
 
+  batteryLife = [
+    { id: { maxValue: 3 }, name: '< 3 hr' },
+    { id: { minValue: 3, maxValue: 8 }, name: '3 - 8 hr' },
+    { id: { minValue: 8, maxValue: 13 }, name: '8 - 13 hr' },
+    { id: { minValue: 13 }, name: '> 13 hr' }
+  ];
+
   widgetForm = this.fb.group({
     brandName: this.fb.group({
       brandNameValue: this.fb.array([]),
@@ -218,7 +224,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       itemWeightRange: this.fb.array([]),
       weight: [1],
       review: false
-    })
+    }),
+    averageBatteryLife: this.fb.group({
+      averageBatteryLifeRange: this.fb.array([]),
+      weight: [1],
+      review: false
+    }),
   });
 
   constructor(private dataService: DataService, private fb: FormBuilder) {}
@@ -230,7 +241,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.getLaptops();
     }
-    this.arr = new Array(12);
+    this.arr = new Array(13);
     this.arr['brandName'] = 0 ;
     this.arr['price'] = 0;
     this.arr['avgRating'] = 0;
@@ -243,6 +254,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.arr['operatingSystem'] = 0;
     this.arr['ram'] = 0;
     this.arr['itemWeight'] = 0;
+    this.arr['averageBatteryLife'] = 0;
   }
 
   get brandNames() {
